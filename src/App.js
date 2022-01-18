@@ -4,6 +4,7 @@ import Gallery from "./components/Gallery";
 import Searchbar from "./components/Searchbar";
 import { DataContext } from "./context/DataContext";
 import { SearchContext } from "./context/SearchContext";
+import {BrowserRouter as Router, Route} from "react-router-dom"
 
 function App() {
   let [message, setMessage] = useState("Search for Music!");
