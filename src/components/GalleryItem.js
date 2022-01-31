@@ -1,14 +1,16 @@
 // Gallerysong.js
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-function Gallerysong(props) {
+function GalleryItem(props) {
   let [view, setView] = useState(false);
 
   const simpleStyle = {
     width: "25vw",
-    height: "20vh",
+    height: "40vh",
     border: "1px solid black",
     margin: "2px",
+    backgroundColor: "skyblue"
   };
 
   const detailStyle = {
@@ -19,7 +21,7 @@ function Gallerysong(props) {
     backgroundImage: `url(${props.song.artworkUrl100})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-    color: "yellow",
+    color: "white",
   };
 
   const simpleView = () => {
@@ -35,19 +37,25 @@ function Gallerysong(props) {
   const detailView = () => {
     return (
       <div style={detailStyle}>
-        <h2>{props.song.trackName}</h2>
-        <h3>{props.song.collectionName}</h3>
-        <h4>{props.song.primaryGenreName}</h4>
-        <h4>{props.song.releaseDate}</h4>
+        <h2>"{props.song.trackName}"</h2>
+        <h3>
+          <Link to={`/artist/${props.song.artistId}`}>
+            {props.song.artistName}
+          </Link>
+        </h3>
+        <h3>
+          <Link to={`/album/${props.song.collectionId}`}>
+            {props.song.collectionName}
+          </Link>
+        </h3>
       </div>
     );
   };
 
   return (
     <div onClick={() => setView(!view)} style={{ display: "inline-block" }}>
-      // This simple ternary shows the simple view when 'view' is false!
       {view ? detailView() : simpleView()}
     </div>
   );
 }
-export default Gallerysong;
+export default GalleryItem;
