@@ -1,10 +1,11 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Gallery from "./components/Gallery";
 import SearchBar from "./components/SearchBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ArtistView from "./components/ArtistView";
 import AlbumView from "./components/AlbumView";
+import Loader from "./components/Loading";
 
 function App() {
   let [searchTerm, setSearchTerm] = useState("");
@@ -34,6 +35,17 @@ function App() {
     setSearchTerm(term);
   };
 
+  const renderGal = () => {
+    if (data) {
+      return (
+        <Suspense fallback={<Loader />}>
+          <Gallery data={data}/>
+        </Suspense>
+      );
+    }
+  };
+
+
   return (
     <div className="App">
       {message}
@@ -44,7 +56,8 @@ function App() {
             element={
               <div>
                 <SearchBar handleSearch={handleSearch} />
-                <Gallery data={data} />
+                {renderGal()}
+                {/* <Gallery data={data} /> */}
               </div>
             }
           />

@@ -10,6 +10,7 @@ function GalleryItem(props) {
     height: "40vh",
     border: "1px solid black",
     margin: "2px",
+    backgroundColor: "skyblue"
   };
 
   const detailStyle = {
@@ -20,7 +21,7 @@ function GalleryItem(props) {
     backgroundImage: `url(${props.song.artworkUrl100})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-    color: "yellow",
+    color: "white",
   };
 
   const simpleView = () => {
@@ -35,7 +36,7 @@ function GalleryItem(props) {
 
   const detailView = () => {
     return (
-      <div>
+      <div style={detailStyle}>
         <h2>"{props.song.trackName}"</h2>
         <h3>
           <Link to={`/artist/${props.song.artistId}`}>
